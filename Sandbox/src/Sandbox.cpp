@@ -15,6 +15,6 @@ public:
 
 Engine::Application* Engine::CreateApplication()
 {
-	printf("Sandbox started");
+	ENGINE_INFO("Initialised Sandbox");
 	return new Sandbox();
 }

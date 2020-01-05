@@ -5,3 +5,5 @@
 
 // -- Entry Point
 #include "Engine/EntryPoint.h"
+
+#include "Engine/Log.h"
