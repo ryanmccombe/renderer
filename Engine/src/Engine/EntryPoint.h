@@ -1,5 +1,4 @@
 #pragma once
-#include <cstdio>
 #include "Log.h"
 
 #ifdef ENGINE_PLATFORM_WINDOWS
