@@ -2,6 +2,10 @@
 
 #include "WindowsWindow.h"
 
+#include "Engine/Events/MouseEvent.h"
+#include "Engine/Events/KeyEvent.h"
+#include "Engine/Events/ApplicationEvent.h"
+
 namespace Engine
 {
 	static bool s_GLFWInitialised = false;
@@ -59,6 +63,16 @@ namespace Engine
 		glfwMakeContextCurrent(m_Window);
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
+
+		// TODO implement other glfw callbacks too
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
+		{
+			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+			data.Width = width;
+			data.Height = height;
+			WindowResizeEvent event(width, height);
+			data.EventCallback(event);
+		});
 	}
 
 	void WindowsWindow::Shutdown()
