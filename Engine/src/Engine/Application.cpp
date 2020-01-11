@@ -1,5 +1,6 @@
 #include "enginepch.h"
 #include "Application.h"
+#include "Engine/Log.h"
 
 // TODO: delete this test code
 #include <GLFW/glfw3.h>
@@ -23,6 +24,17 @@ namespace Engine
 		m_Running = false;
 		return true;
 	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+	};
+
+	void Application::PushOverlay(Layer* overlay)
+	{
+		m_LayerStack.PushOverlay(overlay);
+	}
+	
 	
 	void Application::Run()
 	{
@@ -33,6 +45,8 @@ namespace Engine
 			// TODO: delete this test code
 			glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			for (Layer* layer : m_LayerStack) layer->OnUpdate();
 		};
 	}
 
@@ -41,5 +55,11 @@ namespace Engine
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 		ENGINE_CORE_TRACE("{0}", e);
+
+		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
+		{
+			(*--it)->OnEvent(e);
+			if (e.Handled) break;
+		}
 	}
 }
