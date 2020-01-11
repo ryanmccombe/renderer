@@ -57,7 +57,9 @@ project "Engine"
 
 		defines {
 			"ENGINE_PLATFORM_WINDOWS",
-			"ENGINE_BUILD_DLL"
+			"ENGINE_BUILD_DLL",
+			-- TODO: This shouldn't be windows only
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands {
