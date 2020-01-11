@@ -1,3 +1,5 @@
+include("premakeConfig")
+
 workspace "Engine"
 	architecture "x64"
 	configurations {
@@ -5,12 +7,19 @@ workspace "Engine"
 		"Release",
 		"Dist"
 	}
+	workspace_files {
+        "premake5.lua",
+		"premakeConfig.lua"
+    }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
+IncludeDir["Glad"] = "Engine/vendor/Glad/include"
+
 include "Engine/vendor/GLFW"
+include "Engine/vendor/Glad"
 
 project "Engine"
 	location "Engine"
@@ -31,11 +40,13 @@ project "Engine"
 	includedirs {
 		"%{prj.name}/vendor/spdlog/include",
 		"%{prj.name}/src",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links {
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
