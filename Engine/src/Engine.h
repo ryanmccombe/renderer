@@ -4,6 +4,7 @@
 #include "Engine/Application.h"
 
 #include "Engine/Layer.h"
+#include "Engine/ImGui/ImGuiLayer.h"
 
 #include "Engine/Log.h"
 
