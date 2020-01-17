@@ -17,6 +17,7 @@ namespace Engine
 		AppUpdate,
 		AppRender,
 		KeyPressed,
+		KeyTyped,
 		KeyReleased,
 		MouseButtonPressed,
 		MouseButtonReleased,

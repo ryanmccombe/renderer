@@ -117,6 +117,13 @@ namespace Engine
 			
 		});
 
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keyCode)
+		{
+			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+			KeyTypedEvent event(keyCode);
+			data.EventCallback(event);
+		});
+
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 		{
 			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
