@@ -5,6 +5,8 @@
 // TODO: delete this test code
 #include <glad/glad.h>
 
+#include "Input.h"
+
 namespace Engine
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 {
@@ -51,6 +53,9 @@ namespace Engine
 			// TODO: delete this test code
 			glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			auto [x, y] = Input::GetMousePosition();
+			ENGINE_CORE_TRACE("{0}, {1}", x ,y);
 
 			for (Layer* layer : m_LayerStack) layer->OnUpdate();
 		};
