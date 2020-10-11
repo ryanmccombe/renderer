@@ -6,12 +6,20 @@ public:
 	TestLayer() : Layer("Test") {}
 	void OnUpdate() override
 	{
-		ENGINE_INFO("Test Layer Updated");
+		// ENGINE_INFO("Test Layer Updated");
+		if (Engine::Input::IsKeyPressed(ENGINE_KEY_SPACE))
+		{
+			ENGINE_INFO("Space Bar Pressed");
+		}
 	};
 
 	void OnEvent(Engine::Event& event) override
 	{
-		ENGINE_TRACE("{0}", event);
+		if (event.GetEventType() == Engine::EventType::KeyPressed)
+		{
+			Engine::KeyPressedEvent& e = (Engine::KeyPressedEvent&)event;
+			ENGINE_TRACE("Key Pressed Event: {0} ({1})", e.GetKeyCode(), (char)e.GetKeyCode());
+		}
 	}
 };
 

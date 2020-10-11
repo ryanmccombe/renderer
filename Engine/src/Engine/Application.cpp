@@ -54,8 +54,8 @@ namespace Engine
 			glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			auto [x, y] = Input::GetMousePosition();
-			ENGINE_CORE_TRACE("{0}, {1}", x ,y);
+			// auto [x, y] = Input::GetMousePosition();
+			// ENGINE_CORE_TRACE("{0}, {1}", x ,y);
 
 			for (Layer* layer : m_LayerStack) layer->OnUpdate();
 		};
@@ -65,7 +65,7 @@ namespace Engine
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
-		ENGINE_CORE_TRACE("{0}", e);
+		// ENGINE_CORE_TRACE("{0}", e);
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{
