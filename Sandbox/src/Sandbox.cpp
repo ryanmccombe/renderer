@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "imgui/imgui.h"
 
 class TestLayer : public Engine::Layer
 {
@@ -12,6 +13,13 @@ public:
 			ENGINE_INFO("Space Bar Pressed");
 		}
 	};
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
+	}
 
 	void OnEvent(Engine::Event& event) override
 	{
@@ -29,8 +37,7 @@ public:
 	Sandbox()
 	{
 		PushLayer(new TestLayer());
-		PushOverlay(new Engine::ImGuiLayer());
-
+		// PushOverlay(new Engine::ImGuiLayer());
 	}
 	~Sandbox()
 	{
